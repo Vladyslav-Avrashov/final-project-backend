@@ -15,6 +15,7 @@ export const setupServer = () => {
   app.use(express.json());
   app.use('/api-docs', swaggerDocs());
   app.use('/api', router);
+  
 
   app.use(errorHandler);
 

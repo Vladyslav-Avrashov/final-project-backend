@@ -17,11 +17,14 @@ requestBody:
           - password
         properties:
           email:
-            description: User's registered email address
+            description: User's registered email address. Must be a valid email format (e.g., name@example.com) and no longer than 128 characters.
+            maxLength: 128
             type: string
             example: 'princessD@gmail.com'
           password:
-            description: User's account password
+            description: User's password. Must be between 8 and 128 characters.
+            minLength: 8
+            maxLength: 128
             type: string
             example: '12345678'
 responses:

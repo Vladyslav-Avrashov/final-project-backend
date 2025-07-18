@@ -18,15 +18,19 @@ requestBody:
           - name
         properties:
           email:
-            description: Must be a valid and unique email address
+            description: Must be a valid email address, no longer than 128 characters. Must be unique.
+            maxLength: 128
             type: string
             example: 'princessD@gmail.com'
           password:
-            description: Must meet minimum security requirements (e.g., length, complexity)
+            description: Password must be between 8 and 128 characters.
+            minLength: 8
+            maxLength: 128
             type: string
             example: '12345678'
           name:
-            description: User's display name
+            description: User's display name. Maximum length - 16 characters.
+            maxLength: 16
             type: string
             example: Diana princess of Wales
 responses:

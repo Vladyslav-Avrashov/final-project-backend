@@ -6,12 +6,15 @@ import {
   logoutController,
   refreshSessionController,
   registerController,
+  currentUserController,
 } from '../controllers/auth.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { authenticate } from '../middlewares/authenticate.js';
 import { validateRefreshCookies } from '../middlewares/validateRefreshCookies.js';
 
 const authRouter = Router();
+
+authRouter.get('/current', authenticate, currentUserController);
 
 authRouter.post(
   '/register',

@@ -1,5 +1,6 @@
 import { model, Schema } from 'mongoose';
 import { emailRegExp } from '../../constants/index.js';
+import { saveErrorHandler, setUpdateSettings } from './hooks.js';
 
 const userSchema = new Schema(
   {
@@ -19,5 +20,11 @@ userSchema.methods.toJSON = function () {
   delete obj.password;
   return obj;
 };
+
+userSchema.post('save', saveErrorHandler);
+
+userSchema.pre('findOneAndUpdate', setUpdateSettings);
+
+userSchema.post('findOneAndUpdate', saveErrorHandler);
 
 export const UsersCollection = model('user', userSchema);

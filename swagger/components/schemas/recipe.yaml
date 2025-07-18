@@ -1,0 +1,89 @@
+type: object
+required:
+  - title
+  - description
+  - time
+  - calories
+  - category
+  - ingredients
+  - instructions
+  - thumb
+properties:
+  title:
+    description: "Recipe's title"
+    type: string
+    maxLength: 64
+    example: 'Battenberg Cake'
+
+  description:
+    description: 'Short description of the recipe'
+    type: string
+    maxLength: 200
+    example: 'Classic British cake with almond sponge and marzipan.'
+
+  time:
+    description: 'Preparation and cooking time in minutes'
+    type: integer
+    minimum: 1
+    maximum: 360
+    example: 60
+
+  calories:
+    description: 'Total number of calories in the recipe'
+    type: integer
+    minimum: 1
+    maximum: 10000
+    example: 500
+
+  category:
+    description: 'Category of the recipe (e.g., Dessert, Salad)'
+    type: string
+    example: Dessert
+
+  ingredients:
+    description: 'List of ingredients, each with name and amount'
+    type: array
+    items:
+      type: object
+      required:
+        - name
+        - amount
+      properties:
+        name:
+          type: string
+          example: 'Eggs'
+        amount:
+          type: string
+          example: '4 whole'
+    example:
+      - name: 'Eggs'
+        amount: '4 whole'
+      - name: 'Sugar'
+        amount: '100g'
+
+  instructions:
+    description: 'Step-by-step cooking instructions'
+    type: string
+    maxLength: 1200
+    example: >
+      Bake two sponge cakes at 180°C for 25–30 mins. Cool, cut, and assemble in a checkerboard with apricot jam. Wrap with marzipan.
+
+  thumb:
+    description: 'URL to the recipe preview image'
+    type: string
+    format: uri
+    example: 'https://ftp.goit.study/img/so-yummy/preview/Battenberg%20Cake.jpg'
+
+  createdAt:
+    type: string
+    format: date-time
+    readOnly: true
+    description: 'Timestamp of recipe creation'
+    example: '2025-07-14T11:45:51.607Z'
+
+  updatedAt:
+    type: string
+    format: date-time
+    readOnly: true
+    description: 'Timestamp of last recipe update'
+    example: '2025-07-14T11:45:51.607Z'

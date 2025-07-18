@@ -33,6 +33,9 @@ paths:
   /api/auth/refresh:
     post:
       $ref: ../swagger/paths/auth/refresh/post.yaml
+  /api/recipes:
+    post:
+      $ref: ../swagger/paths/recipes/post.yaml
 components:
   securitySchemes:
     bearerAuth:

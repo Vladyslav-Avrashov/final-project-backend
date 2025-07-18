@@ -21,6 +21,18 @@ servers:
   - url: http://localhost:3000
   - url: https://example.com/api/v1
 paths:
+  /api/auth/login:
+    post:
+      $ref: ../swagger/paths/auth/login/post.yaml
+  /api/auth/register:
+    post:
+      $ref: ../swagger/paths/auth/register/post.yaml
+  /api/auth/logout:
+    post:
+      $ref: ../swagger/paths/auth/logout/post.yaml
+  /api/auth/refresh:
+    post:
+      $ref: ../swagger/paths/auth/refresh/post.yaml
 components:
   securitySchemes:
     bearerAuth:

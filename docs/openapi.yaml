@@ -33,6 +33,9 @@ paths:
   /api/auth/refresh:
     post:
       $ref: ../swagger/paths/auth/refresh/post.yaml
+  /api/users/current:
+    get:
+      $ref: ../swagger/paths/users/current/get.yaml
   /api/recipes:
     post:
       $ref: ../swagger/paths/recipes/post.yaml

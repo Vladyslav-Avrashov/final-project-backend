@@ -26,7 +26,7 @@ const recipeSchema = new Schema(
     },
     category: {
       type: String,
-      ref: 'categories',
+      ref: 'Category',
       required: true,
     },
     ingredients: {
@@ -64,5 +64,6 @@ const recipeSchema = new Schema(
 );
 recipeSchema.post('save', saveErrorHandler);
 recipeSchema.pre('findOneAndUpdate', setUpdateSettings);
+export const recipesSortFields = ['Category', 'Ingredient'];
 
 export const Recipe = model('Recipe', recipeSchema);

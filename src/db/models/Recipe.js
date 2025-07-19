@@ -8,11 +8,17 @@ const recipeSchema = new Schema(
       maxlength: 64,
       required: true,
     },
-
-    description: { type: String, maxlength: 200, required: true },
-
-    time: { type: Number, required: true, min: 1, max: 360 },
-
+    description: {
+      type: String,
+      maxlength: 200,
+      required: true,
+    },
+    time: {
+      type: Number,
+      required: true,
+      min: 1,
+      max: 360,
+    },
     calories: {
       type: Number,
       min: 1,
@@ -20,13 +26,22 @@ const recipeSchema = new Schema(
     },
     category: {
       type: String,
-      ref: 'categories',
+      ref: 'Category',
       required: true,
     },
     ingredients: {
-      type: String,
-      ref: 'ingredients',
-      required: true,
+      type: [
+        {
+          name: {
+            type: String,
+            required: true,
+          },
+          amount: {
+            type: String,
+            required: true,
+          },
+        },
+      ],
     },
     instructions: {
       type: String,
@@ -49,5 +64,6 @@ const recipeSchema = new Schema(
 );
 recipeSchema.post('save', saveErrorHandler);
 recipeSchema.pre('findOneAndUpdate', setUpdateSettings);
+export const recipesSortFields = ['Category', 'Ingredient'];
 
 export const Recipe = model('Recipe', recipeSchema);

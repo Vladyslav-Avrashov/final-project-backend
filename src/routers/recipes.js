@@ -7,10 +7,11 @@ import {
   createNewRecipeController,
   getRecipesController,
 } from '../controllers/recipe.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 const recipesRouter = Router();
 
-recipesRouter.get('/', ctrlWrapper(getRecipesController));
+recipesRouter.get('/', authenticate, ctrlWrapper(getRecipesController));
 
 recipesRouter.post(
   '/',

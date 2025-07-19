@@ -11,3 +11,5 @@ export const getRefreshTokenValidUntil = () =>
 
 export const TEMP_DIR = resolve('temp');
 export const UPLOADS_DIR = resolve('uploads');
+
+export const sortList = ['asc', 'desc'];

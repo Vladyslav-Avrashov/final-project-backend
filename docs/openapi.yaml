@@ -36,6 +36,9 @@ paths:
   /api/users/current:
     get:
       $ref: ../swagger/paths/users/current/get.yaml
+  /api/recipes:
+    post:
+      $ref: ../swagger/paths/recipes/post.yaml
 components:
   securitySchemes:
     bearerAuth:

@@ -15,6 +15,7 @@ recipesRouter.get('/', authenticate, ctrlWrapper(getRecipesController));
 
 recipesRouter.post(
   '/',
+  authenticate,
   upload.single('thumb'),
   validateBody(createRecipeSchema),
   ctrlWrapper(createNewRecipeController),

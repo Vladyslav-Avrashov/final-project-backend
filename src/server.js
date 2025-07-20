@@ -13,9 +13,9 @@ export const setupServer = () => {
   app.use(cors());
   app.use(cookieParser());
   app.use(express.json());
+  app.use(express.static('uploads'));
   app.use('/api-docs', swaggerDocs());
   app.use('/api', router);
-  
 
   app.use(errorHandler);
 

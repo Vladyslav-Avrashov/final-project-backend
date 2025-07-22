@@ -39,6 +39,9 @@ paths:
   /api/categories:
     get:
       $ref: ../swagger/paths/categories/get.yaml
+  /api/ingredients:
+    get:
+      $ref: ../swagger/paths/ingredients/get.yaml
   /api/recipes:
     post:
       $ref: ../swagger/paths/recipes/post.yaml
@@ -50,3 +53,5 @@ components:
   schemas:
     Category:
       $ref: '../swagger/components/schemas/category.yaml'
+    Ingredient:
+      $ref: '../swagger/components/schemas/ingredient.yaml'

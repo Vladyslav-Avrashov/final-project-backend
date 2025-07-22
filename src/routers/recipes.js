@@ -3,6 +3,7 @@ import { validateBody } from '../middlewares/validateBody.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { upload } from '../middlewares/upload.js';
 import { createRecipeSchema } from '../validation/recipe.js';
+import { getRecipeByIdController } from '../controllers/recipe.js';
 import {
   createNewRecipeController,
   getRecipesController,
@@ -11,7 +12,7 @@ import { authenticate } from '../middlewares/authenticate.js';
 
 const recipesRouter = Router();
 
-recipesRouter.get('/', authenticate, ctrlWrapper(getRecipesController));
+recipesRouter.get('/', ctrlWrapper(getRecipesController));
 
 recipesRouter.post(
   '/',
@@ -20,5 +21,6 @@ recipesRouter.post(
   validateBody(createRecipeSchema),
   ctrlWrapper(createNewRecipeController),
 );
+recipesRouter.get('/:id', ctrlWrapper(getRecipeByIdController));
 
 export default recipesRouter;

@@ -1,0 +1,26 @@
+tags:
+  - Recipes
+security:
+  - bearerAuth: []
+summary: Delete own recipe by ID
+operationId: deleteOwnRecipe
+description: Only the owner of the recipe has permission to delete it.
+parameters:
+  - name: id
+    in: path
+    required: true
+    description: Unique identifier of the recipe to delete
+    schema:
+      type: string
+      example: 6462a8f74c3d0ddd28898047
+responses:
+  '204':
+    description: Recipe successfully deleted
+  '400':
+    $ref: ../../../components/responses/400.yaml
+  '401':
+    $ref: ../../../components/responses/401.yaml
+  '403':
+    $ref: ../../../components/responses/403.yaml
+  '404':
+    $ref: ../../../components/responses/404.yaml

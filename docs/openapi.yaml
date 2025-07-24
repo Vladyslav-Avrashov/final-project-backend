@@ -48,6 +48,8 @@ paths:
   /api/recipes/{id}:
     get:
       $ref: ../swagger/paths/recipes/by-id/get.yaml
+    delete:
+      $ref: ../swagger/paths/recipes/by-id/delete.yaml
 components:
   securitySchemes:
     bearerAuth:

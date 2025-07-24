@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   version: 1.0.0
-  title: Students app
+  title: Tasteorama app
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -18,8 +18,8 @@ tags:
   - name: Recipes
     description: Operations about recipes.
 servers:
+  - url: https://final-project-backend-rtvo.onrender.com
   - url: http://localhost:3000
-  - url: https://example.com/api/v1
 paths:
   /api/auth/login:
     post:
@@ -36,8 +36,27 @@ paths:
   /api/users/current:
     get:
       $ref: ../swagger/paths/users/current/get.yaml
+  /api/categories:
+    get:
+      $ref: ../swagger/paths/categories/get.yaml
+  /api/ingredients:
+    get:
+      $ref: ../swagger/paths/ingredients/get.yaml
+  /api/recipes:
+    post:
+      $ref: ../swagger/paths/recipes/post.yaml
+  /api/recipes/{id}:
+    get:
+      $ref: ../swagger/paths/recipes/by-id/get.yaml
+    delete:
+      $ref: ../swagger/paths/recipes/by-id/delete.yaml
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
+  schemas:
+    Category:
+      $ref: '../swagger/components/schemas/category.yaml'
+    Ingredient:
+      $ref: '../swagger/components/schemas/ingredient.yaml'

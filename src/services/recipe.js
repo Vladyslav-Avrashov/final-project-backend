@@ -37,3 +37,9 @@ export const getRecipes = async ({
 };
 
 export const createNewRecipe = async (payload) => await Recipe.create(payload);
+
+export const getRecipeById = async (id) => {
+  return await Recipe.findById(id);
+};
+
+export const deleteOwnRecipe = async (id) => await Recipe.findByIdAndDelete(id);

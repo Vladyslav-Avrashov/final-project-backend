@@ -13,6 +13,7 @@ export const getRecipesController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortOrder, sortBy } = parseSortParams(req.query, recipesSortFields);
   const filters = parseRecipeFilters({ ...req.query, userId });
+
   const data = await getRecipes({ page, perPage, sortBy, sortOrder, filters });
   res.json({
     status: 200,

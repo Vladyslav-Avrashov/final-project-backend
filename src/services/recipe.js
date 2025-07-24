@@ -15,8 +15,14 @@ export const getRecipes = async ({
   if (filters.userId) {
     query.where('owner').equals(filters.userId);
   }
-  if (filters.type) {
-    query.where('type').equals(filters.type);
+  if (filters.category) {
+    query.where('category').equals(filters.category);
+  }
+  if (filters.ingredientName) {
+    query.where('ingredient.name').equals(filters.ingredientName);
+  }
+  if (filters.searchQuery) {
+    query.where('title').regex(new RegExp(filters.searchQuery, 'i'));
   }
   const totalItems = await Recipe.countDocuments(query.getFilter());
 

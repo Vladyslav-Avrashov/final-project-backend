@@ -1,17 +1,17 @@
 const parseString = (str) => {
   if (typeof str !== 'string') return;
-
   return str;
 };
 
-export const parseRecipeFilters = ({ type, title, ingredient }) => {
-  const parsedType = parseString(type);
-  const parsedIngredient = parseString(ingredient);
-  const parsedTitle = parseString(title);
+export const parseRecipeFilters = ({ categories, ingredients, search }) => {
+
+  const parsedCategory = parseString(categories);
+  const parsedIngredient = parseString(ingredients);
+  const parsedSearch = parseString(search);
 
   return {
-    type: parsedType,
-    ...(parsedIngredient && { ingredient: parsedIngredient }),
-    ...(parsedTitle && { title: parsedTitle }),
+    ...(parsedCategory && { category: parsedCategory }),
+    ...(parsedIngredient && { ingredientName: parsedIngredient }),
+    ...(parsedSearch && { searchQuery: parsedSearch }), 
   };
 };

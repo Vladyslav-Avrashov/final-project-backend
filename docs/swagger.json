@@ -61,12 +61,19 @@
                 ],
                 "properties": {
                   "email": {
-                    "description": "User's registered email address",
+
+                    "description": "User's registered email address. Must be a valid email format (e.g., name@example.com) and no longer than 128 characters.",
+                    "maxLength": 128,
+
                     "type": "string",
                     "example": "princessD@gmail.com"
                   },
                   "password": {
-                    "description": "User's account password",
+
+                    "description": "User's password. Must be between 8 and 128 characters.",
+                    "minLength": 8,
+                    "maxLength": 128,
+
                     "type": "string",
                     "example": "12345678"
                   }
@@ -141,17 +148,23 @@
                 ],
                 "properties": {
                   "email": {
-                    "description": "Must be a valid and unique email address",
+
+                    "description": "Must be a valid email address, no longer than 128 characters. Must be unique.",
+                    "maxLength": 128,
                     "type": "string",
                     "example": "princessD@gmail.com"
                   },
                   "password": {
-                    "description": "Must meet minimum security requirements (e.g., length, complexity)",
+
+                    "description": "Password must be between 8 and 128 characters.",
+                    "minLength": 8,
+                    "maxLength": 128,
                     "type": "string",
                     "example": "12345678"
                   },
                   "name": {
-                    "description": "User's display name",
+                    "description": "User's display name. Maximum length - 16 characters.",
+                    "maxLength": 16,
                     "type": "string",
                     "example": "Diana princess of Wales"
                   }
@@ -312,6 +325,123 @@
           }
         }
       }
+
+    },
+    "/api/recipes": {
+      "post": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Create recipe",
+        "operationId": "createRecipe",
+        "description": "Create a recipe",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "title",
+                  "description",
+                  "time",
+                  "calories",
+                  "category",
+                  "ingredients",
+                  "instructions",
+                  "thumb"
+                ],
+                "properties": {
+                  "title": {
+                    "description": "Recipe's name. Should be max 64 symbols.",
+                    "type": "string",
+                    "example": "Battenberg Cake"
+                  },
+                  "description": {
+                    "description": "Recipe's description. Should be max 200 symbols.",
+                    "type": "string",
+                    "example": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance."
+                  },
+                  "time": {
+                    "description": "Recipe's time. Should be between 1 and max 360.",
+                    "type": "string",
+                    "example": "60"
+                  },
+                  "calories": {
+                    "description": "Recipe's calories. Should be between 1 and 1000",
+                    "type": "string",
+                    "example": "500"
+                  },
+                  "category": {
+                    "description": "Recipe's category.",
+                    "type": "string",
+                    "example": "Cake"
+                  },
+                  "ingredients": {
+                    "description": "Recipe's ingredients.",
+                    "type": "array",
+                    "example": [
+                      {
+                        "name": "Eggs",
+                        "amount": "4 wholes"
+                      }
+                    ]
+                  },
+                  "instructions": {
+                    "description": "Recipe's instructions.",
+                    "type": "string",
+                    "example": "Bake two sponge cakes (one almond, one pink without almond extract) at 180°C in a lined 20cm tin, 25–30 mins each. Cut each cake into 4 equal strips and assemble alternating colours with apricot jam, forming a checkerboard. Wrap in rolled marzipan, seal and trim edges, then crimp or decorate if desired. Store airtight or freeze."
+                  },
+                  "thumb": {
+                    "description": "Recipe's thumb",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully created new recipe!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully created new recipe!"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/recipe"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      }
+
     }
   },
   "components": {
@@ -486,6 +616,110 @@
             "format": "date-time",
             "readOnly": true,
             "description": "Date of last user update",
+            "example": "2025-07-14T11:45:51.607Z"
+          }
+        }
+
+      },
+      "recipe": {
+        "type": "object",
+        "required": [
+          "title",
+          "description",
+          "time",
+          "calories",
+          "category",
+          "ingredients",
+          "instructions",
+          "thumb"
+        ],
+        "properties": {
+          "title": {
+            "description": "Recipe's title",
+            "type": "string",
+            "maxLength": 64,
+            "example": "Battenberg Cake"
+          },
+          "description": {
+            "description": "Short description of the recipe",
+            "type": "string",
+            "maxLength": 200,
+            "example": "Classic British cake with almond sponge and marzipan."
+          },
+          "time": {
+            "description": "Preparation and cooking time in minutes",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 360,
+            "example": 60
+          },
+          "calories": {
+            "description": "Total number of calories in the recipe",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10000,
+            "example": 500
+          },
+          "category": {
+            "description": "Category of the recipe (e.g., Dessert, Salad)",
+            "type": "string",
+            "example": "Dessert"
+          },
+          "ingredients": {
+            "description": "List of ingredients, each with name and amount",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "amount"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Eggs"
+                },
+                "amount": {
+                  "type": "string",
+                  "example": "4 whole"
+                }
+              }
+            },
+            "example": [
+              {
+                "name": "Eggs",
+                "amount": "4 whole"
+              },
+              {
+                "name": "Sugar",
+                "amount": "100g"
+              }
+            ]
+          },
+          "instructions": {
+            "description": "Step-by-step cooking instructions",
+            "type": "string",
+            "maxLength": 1200,
+            "example": "Bake two sponge cakes at 180°C for 25–30 mins. Cool, cut, and assemble in a checkerboard with apricot jam. Wrap with marzipan.\n"
+          },
+          "thumb": {
+            "description": "URL to the recipe preview image",
+            "type": "string",
+            "format": "uri",
+            "example": "https://ftp.goit.study/img/so-yummy/preview/Battenberg%20Cake.jpg"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Timestamp of recipe creation",
+            "example": "2025-07-14T11:45:51.607Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Timestamp of last recipe update",
             "example": "2025-07-14T11:45:51.607Z"
           }
         }

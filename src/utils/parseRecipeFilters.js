@@ -1,17 +1,30 @@
 const parseString = (str) => {
   if (typeof str !== 'string') return;
-  return str;
+  return str.trim();
 };
 
-export const parseRecipeFilters = ({ categories, ingredients, search }) => {
-
+export const parseRecipeFilters = ({
+  type,
+  title,
+  ingredient,
+  categories,
+  ingredients,
+  search,
+  userId,
+}) => {
+  const parsedType = parseString(type);
+  const parsedTitle = parseString(title);
+  const parsedIngredient = parseString(ingredient || ingredients);
   const parsedCategory = parseString(categories);
-  const parsedIngredient = parseString(ingredients);
   const parsedSearch = parseString(search);
+  const parsedUserId = parseString(userId);
 
   return {
-    ...(parsedCategory && { category: parsedCategory }),
+    ...(parsedType && { type: parsedType }),
+    ...(parsedTitle && { title: parsedTitle }),
     ...(parsedIngredient && { ingredientName: parsedIngredient }),
-    ...(parsedSearch && { searchQuery: parsedSearch }), 
+    ...(parsedCategory && { category: parsedCategory }),
+    ...(parsedSearch && { searchQuery: parsedSearch }),
+    ...(parsedUserId && { userId: parsedUserId }),
   };
 };

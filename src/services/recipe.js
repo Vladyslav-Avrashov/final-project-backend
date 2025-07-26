@@ -9,6 +9,7 @@ export const getRecipes = async ({
   sortOrder = sortList[0],
   filters = {},
 }) => {
+
   const skip = (page - 1) * perPage;
   const query = Recipe.find();
 
@@ -18,12 +19,17 @@ export const getRecipes = async ({
   if (filters.category) {
     query.where('category').equals(filters.category);
   }
-  if (filters.ingredientName) {
-    query.where('ingredient.name').equals(filters.ingredientName);
-  }
+if (filters.ingredientName) {
+  const ingredientRegex = new RegExp(filters.ingredientName, 'i');
+  query.or([
+    { 'ingredients.name': { $regex: ingredientRegex } },
+    { title: { $regex: ingredientRegex } },
+  ]);
+}
   if (filters.searchQuery) {
     query.where('title').regex(new RegExp(filters.searchQuery, 'i'));
   }
+
   const totalItems = await Recipe.countDocuments(query.getFilter());
 
   const items = await query

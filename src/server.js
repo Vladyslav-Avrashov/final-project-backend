@@ -16,7 +16,6 @@ export const setupServer = () => {
   app.use(express.static('uploads'));
   app.use('/api-docs', swaggerDocs());
   app.use('/api', router);
-
   app.use(errorHandler);
 
   app.get(notFoundHandler);

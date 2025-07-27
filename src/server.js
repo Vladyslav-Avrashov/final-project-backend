@@ -6,11 +6,17 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { getEnvVar } from './utils/getEnvVar.js';
 import { swaggerDocs } from './middlewares/swaggerDocs.js';
 import router from './routers/index.js';
+import { allowedOrigins } from './constants/index.js';
 
 export const setupServer = () => {
   const app = express();
 
-  app.use(cors());
+  app.use(
+    cors({
+      origin: allowedOrigins,
+      credentials: true,
+    }),
+  );
   app.use(cookieParser());
   app.use(express.json());
   app.use(express.static('uploads'));

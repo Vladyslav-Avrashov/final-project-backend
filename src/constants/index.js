@@ -13,3 +13,8 @@ export const TEMP_DIR = resolve('temp');
 export const UPLOADS_DIR = resolve('uploads');
 
 export const sortList = ['asc', 'desc'];
+
+export const allowedOrigins = [
+  'http://localhost:5173',
+  'https://final-project-frontend-snowy.vercel.app/',
+];

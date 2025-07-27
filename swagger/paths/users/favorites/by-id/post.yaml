@@ -1,0 +1,18 @@
+tags:
+  - Favorites
+summary: Add recipe to favorites
+description: Adds the specified recipe to the authenticated user's list of favorites.
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+    description: ID of the recipe
+responses:
+  200:
+    description: Recipe added to favorites
+  401:
+    $ref: '../../../../components/responses/401.yaml'

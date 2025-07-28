@@ -9,7 +9,7 @@ import {
   getRecipesController,
 } from '../controllers/recipe.js';
 import { authenticate } from '../middlewares/authenticate.js';
-import { deleteOwnRecipeController } from '../controllers/deleteOwnRecipe.js';
+import { deleteOwnRecipeController } from '../controllers/ownRecipes.js';
 import { validateId } from '../middlewares/validateID.js';
 
 const recipesRouter = Router();
@@ -23,13 +23,10 @@ recipesRouter.post(
   validateBody(createRecipeSchema),
   ctrlWrapper(createNewRecipeController),
 );
-recipesRouter.get('/:id', ctrlWrapper(getRecipeByIdController));
 
-recipesRouter.delete(
-  '/:id',
-  authenticate,
-  validateId,
-  ctrlWrapper(deleteOwnRecipeController),
-);
+recipesRouter
+  .route('/:id')
+  .get(ctrlWrapper(getRecipeByIdController))
+  .delete(authenticate, validateId, ctrlWrapper(deleteOwnRecipeController));
 
 export default recipesRouter;

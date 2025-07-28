@@ -7,6 +7,7 @@ import {
   getFavorites,
   removeFromFavorites,
 } from '../controllers/favorites.js';
+import { getOwnRecipesController } from '../controllers/ownRecipes.js';
 
 const usersRouter = Router();
 
@@ -21,5 +22,7 @@ usersRouter.delete(
 );
 
 usersRouter.get('/favorites', authenticate, ctrlWrapper(getFavorites));
+
+usersRouter.get('/own', authenticate, ctrlWrapper(getOwnRecipesController));
 
 export default usersRouter;

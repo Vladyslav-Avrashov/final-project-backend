@@ -47,6 +47,9 @@ paths:
       $ref: ../swagger/paths/users/favorites/by-id/post.yaml
     delete:
       $ref: ../swagger/paths/users/favorites/by-id/delete.yaml
+  /api/users/own:
+    get:
+      $ref: ../swagger/paths/users/own/get.yaml
   /api/categories:
     get:
       $ref: ../swagger/paths/categories/get.yaml
@@ -56,6 +59,8 @@ paths:
   /api/recipes:
     post:
       $ref: ../swagger/paths/recipes/post.yaml
+    get:
+      $ref: ../swagger/paths/recipes/get.yaml
   /api/recipes/{id}:
     get:
       $ref: ../swagger/paths/recipes/by-id/get.yaml

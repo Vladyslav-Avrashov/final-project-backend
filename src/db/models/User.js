@@ -7,7 +7,7 @@ const userSchema = new Schema(
     name: { type: String, required: true },
     email: { type: String, match: emailRegExp, unique: true, required: true },
     password: { type: String, required: true },
-    favorites: [{ type: Schema.Types.ObjectId, ref: 'recipe' }],
+    favorites: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
   },
   {
     timestamps: true,

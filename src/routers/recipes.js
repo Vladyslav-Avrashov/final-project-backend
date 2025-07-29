@@ -26,7 +26,7 @@ recipesRouter.post(
 
 recipesRouter
   .route('/:id')
-  .get(ctrlWrapper(getRecipeByIdController))
+  .get(validateId, ctrlWrapper(getRecipeByIdController))
   .delete(authenticate, validateId, ctrlWrapper(deleteOwnRecipeController));
 
 export default recipesRouter;

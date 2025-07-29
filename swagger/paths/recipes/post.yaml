@@ -46,11 +46,11 @@ requestBody:
             type: array
             example: [{ name: 'Eggs', amount: '4 wholes' }]
           instructions:
-            description: "Recipe's instructions."
+            description: "Recipe's instructions. Max 1200 characters."
             type: string
             example: 'Bake two sponge cakes (one almond, one pink without almond extract) at 180°C in a lined 20cm tin, 25–30 mins each. Cut each cake into 4 equal strips and assemble alternating colours with apricot jam, forming a checkerboard. Wrap in rolled marzipan, seal and trim edges, then crimp or decorate if desired. Store airtight or freeze.'
           thumb:
-            description: "Recipe's thumb"
+            description: "Recipe's thumb. Max 2mb"
             type: string
             format: binary
 responses:

@@ -9,7 +9,6 @@ export const getRecipes = async ({
   sortOrder = sortList[0],
   filters = {},
 }) => {
-
   const skip = (page - 1) * perPage;
   const query = Recipe.find();
 
@@ -19,13 +18,13 @@ export const getRecipes = async ({
   if (filters.category) {
     query.where('category').equals(filters.category);
   }
-if (filters.ingredientName) {
-  const ingredientRegex = new RegExp(filters.ingredientName, 'i');
-  query.or([
-    { 'ingredients.name': { $regex: ingredientRegex } },
-    { title: { $regex: ingredientRegex } },
-  ]);
-}
+  if (filters.ingredientName) {
+    const ingredientRegex = new RegExp(filters.ingredientName, 'i');
+    query.or([
+      { 'ingredients.name': { $regex: ingredientRegex } },
+      { title: { $regex: ingredientRegex } },
+    ]);
+  }
   if (filters.searchQuery) {
     query.where('title').regex(new RegExp(filters.searchQuery, 'i'));
   }
@@ -35,7 +34,7 @@ if (filters.ingredientName) {
   const items = await query
     .skip(skip)
     .limit(perPage)
-    .sort({ [sortBy]: sortOrder });
+    .sort({ [sortBy]: sortOrder, _id: 1 });
 
   const paginationData = calcaPaginationData({ page, perPage, totalItems });
 
